@@ -18,3 +18,9 @@ git clone https://github.com/smarthomescripting/FHEM
 cd FHEM
 ./FHEM_DHT22.py
 ```
+
+# Add to crontab 
+
+Add a line as follows
+
+*/5 * * * * /home/FHEM/FHEM_DHT22.py
