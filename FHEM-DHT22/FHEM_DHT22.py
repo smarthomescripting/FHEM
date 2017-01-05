@@ -12,7 +12,7 @@ sensor = Adafruit_DHT.DHT22 # might be also DHT11 or AM2301
 pin = 4 		# GPIO pin
 ip = '192.168.178.40'	# IP of FHEM
 port = '8083'		# Port of FHEM
-FhemDevice = 'DHT22'	# Name of Device in FHEM
+FhemDevice = sys.argv[1]	# Name of Device in FHEM (taken from command line parameters)
 
 humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
