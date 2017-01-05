@@ -5,6 +5,8 @@
 import sys
 import Adafruit_DHT
 import requests
+import os
+import os.path
 
 sensor = Adafruit_DHT.DHT22 # might be also DHT11 or AM2301
 pin = 4 		# GPIO pin
@@ -15,16 +17,22 @@ FhemDevice = 'DHT22'	# Name of Device in FHEM
 humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
 if humidity is not None and temperature is not None:
+
+	filename= os.path.dirname(os.path.realpath(__file__)) + os.sep + 'history.dat'
 	
-	file = open('history.dat', 'r')
-        old_temp = float(file.readline())
-        old_hum = float(file.readline())
-        file.close()
+	if os.path.exists(filename):
+		file = open(filename, 'r')
+        	old_temp = float(file.readline())
+        	old_hum = float(file.readline())
+        	file.close()
+	else:
+		old_temp = temperature
+		old_hum = humidity
 
 	# print (old_temp)
 	# print (old_hum)
 
-	file = open('history.dat', 'w')
+	file = open(filename, 'w+')
 	file.truncate()
 	file.write(str(round(temperature,1)))
 	file.write("\n")
