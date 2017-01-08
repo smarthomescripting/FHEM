@@ -2,7 +2,11 @@
 
 This script reads a DHT11 or DHT22 device and pushes its temperature and humidity values to a FHEM dummy device 
 
-Below is the manual to get everything setup. Please adjust parameters in FHEM_DHT22.py as required.
+Below is the manual to get everything setup. Please adjust parameters in FHEM_DHT22.py as required. The command line parameter defines the name of the dummy device in FHEM
+
+' ./FHEM_DHT22.py <Name of Dummy Device>
+
+# Install instructions
 
 ```
 sudo apt-get update
@@ -16,11 +20,11 @@ cd ..
 
 git clone https://github.com/smarthomescripting/FHEM
 cd FHEM
-./FHEM_DHT22.py
+./FHEM_DHT22.py DHT22
 ```
 
 # Add to crontab 
 
 Add a line as follows
 
-*/5 * * * * /home/FHEM/FHEM_DHT22.py
+*/5 * * * * /home/FHEM/FHEM_DHT22.py DHT22
