@@ -4,7 +4,9 @@ This script reads a DHT11 or DHT22 device and pushes its temperature and humidit
 
 Below is the manual to get everything setup. Please adjust parameters in FHEM_DHT22.py as required. The command line parameter defines the name of the dummy device in FHEM
 
-' ./FHEM_DHT22.py <Name of Dummy Device>
+```
+./FHEM_DHT22.py <Name of Dummy Device>
+```
 
 # Install instructions
 
