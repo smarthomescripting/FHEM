@@ -7,6 +7,8 @@ import Adafruit_DHT
 import requests
 import os
 import os.path
+import math
+import time
 
 sensor = Adafruit_DHT.DHT22 # might be also DHT11 or AM2301
 pin = 4 		# GPIO pin
@@ -25,6 +27,9 @@ if humidity is not None and temperature is not None:
 
 	filename= os.path.dirname(os.path.realpath(__file__)) + os.sep + 'history.dat'
 	
+	if time.time() - os.path.getmtime(filename) > 3600:
+		os.remove (filename)
+	
 	if os.path.exists(filename):
 		file = open(filename, 'r')
         	old_temp = float(file.readline())
@@ -34,7 +39,9 @@ if humidity is not None and temperature is not None:
 		old_temp = temperature
 		old_hum = humidity
 
-	if (temperature / old_temp) < 1.2 and (temperature / old_temp) > 0.8 and (humidity / old_hum) < 1.2 and (humidity / old_hum) > 0.8:
+	# print (old_temp)
+
+	if math.fabs(temperature / old_temp) < 1.2 and math.fabs(temperature / old_temp) > 0.8 and math.fabs(humidity / old_hum) < 1.2 and math.fabs(humidity / old_hum) > 0.8:
  	
 		file = open(filename, 'w+')
         	file.truncate()
