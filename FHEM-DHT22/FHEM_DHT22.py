@@ -27,8 +27,9 @@ if humidity is not None and temperature is not None:
 
 	filename= os.path.dirname(os.path.realpath(__file__)) + os.sep + 'history.dat'
 	
-	if time.time() - os.path.getmtime(filename) > 3600:
-		os.remove (filename)
+	if os.path.exists(filename):
+		if time.time() - os.path.getmtime(filename) > 3600:
+			os.remove (filename)
 	
 	if os.path.exists(filename):
 		file = open(filename, 'r')
